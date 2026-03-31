@@ -80,28 +80,24 @@ body::after {
   text-align: center;
 }
 .top-alert__inner {
-  max-width: var(--max); margin: 0 auto;
-  display: flex; align-items: center; justify-content: center; gap: 10px;
-  flex-wrap: wrap;
-}
-.top-alert__dot {
-  width: 8px; height: 8px; border-radius: 50%;
-  background: var(--purple-lt);
-  animation: blink 1.6s ease-in-out infinite;
-  flex-shrink: 0;
-}
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50%       { opacity: 0.3; }
+  max-width: var(--max);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 .top-alert__text {
   font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 800; font-size: 14px;
-  letter-spacing: 0.12em; text-transform: uppercase;
+  font-weight: 800;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--white);
+  line-height: 1.35;
 }
 .top-alert__text em {
-  color: var(--purple-lt); font-style: normal;
+  color: var(--purple-lt);
+  font-style: normal;
 }
 
 /* ═══════════════════════════════════════════
@@ -166,11 +162,14 @@ h1 em {
    VSL
 ═══════════════════════════════════════════ */
 .vsl-wrap {
-  width: 100%; margin-bottom: 28px;
-  border-radius: 14px; overflow: hidden;
+  width: 100%;
+  margin-bottom: 28px;
+  border-radius: 14px;
+  overflow: hidden;
   border: 1px solid var(--border);
   background: rgba(255,255,255,0.02);
-  backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
   position: relative;
 }
 .vsl-wrap::before {
@@ -178,6 +177,18 @@ h1 em {
   position: absolute; top: 0; left: 0; right: 0; height: 1px;
   background: linear-gradient(90deg, transparent, rgba(139,92,246,0.55), transparent);
   z-index: 1;
+}
+.vsl-embed {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+}
+.vsl-embed iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
 }
 
 /* ═══════════════════════════════════════════
@@ -271,12 +282,10 @@ footer {
 ══════════════════════════════════════ -->
 <div class="top-alert">
   <div class="top-alert__inner">
-    </div>
     <span class="top-alert__text">
       Não feche essa página —<br>
       <em>essa oferta aparece apenas uma vez</em>
     </span>
-    </div>
   </div>
 </div>
 
@@ -312,14 +321,15 @@ footer {
        MÓDULO: VSL
   ══════════════════════════════════════ -->
   <div class="vsl-wrap">
-    <!-- ▼ SUBSTITUIR PELO EMBED REAL DO VSL ▼ -->
-    <div class="vsl-placeholder">
-      <div class="vsl-play">
-        <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-      </div>
-      <span class="vsl-hint">https://www.youtube.com/embed/uZ5bwzGK9Rg?controls=0</span>
+    <div class="vsl-embed">
+      <iframe
+        src="https://www.youtube.com/embed/uZ5bwzGK9Rg?controls=0"
+        title="Hard Mode App VSL"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin">
+      </iframe>
     </div>
-    <!-- ▲ SUBSTITUIR PELO EMBED REAL DO VSL ▲ -->
   </div>
 
   <!-- ══════════════════════════════════════
