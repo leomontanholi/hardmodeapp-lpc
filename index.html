@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="theme-color" content="#06060c">
+<title>Hard Mode App | Oferta Exclusiva</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800;900&family=Barlow:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════
+   RESET & TOKENS
+═══════════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+:root {
+  --bg:         #06060c;
+  --card:       rgba(255,255,255,0.04);
+  --border:     rgba(255,255,255,0.08);
+  --border-h:   rgba(255,255,255,0.14);
+  --purple:     #5e17eb;
+  --purple-lt:  #9d6ff7;
+  --white:      #f2ecfb;
+  --muted:      rgba(242,236,251,0.55);
+  --dim:        rgba(242,236,251,0.28);
+  --r:          12px;
+  --blur:       blur(20px);
+  --pad:        20px;
+  --max:        720px;
+}
+
+html, body { min-height: 100%; }
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Barlow', sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+
+/* ═══════════════════════════════════════════
+   ORBS
+═══════════════════════════════════════════ */
+.orbs { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(90px); opacity: 0.16;
+  animation: drift 20s ease-in-out infinite alternate;
+}
+.orb-1 { width: 600px; height: 600px; background: #5e17eb; top: -20%; left: -20%; animation-delay: 0s; }
+.orb-2 { width: 320px; height: 320px; background: #8b5cf6; bottom: 5%; right: -8%; animation-delay: -8s; opacity: 0.10; }
+@keyframes drift {
+  0%   { transform: translate(0, 0) scale(1); }
+  50%  { transform: translate(24px, -16px) scale(1.06); }
+  100% { transform: translate(-16px, 24px) scale(0.96); }
+}
+
+/* grain */
+body::after {
+  content: '';
+  position: fixed; inset: 0; pointer-events: none; z-index: 1; opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  background-size: 256px 256px;
+}
+
+/* ═══════════════════════════════════════════
+   ALERTA DE TOPO
+═══════════════════════════════════════════ */
+.top-alert {
+  position: relative; z-index: 10;
+  background: linear-gradient(135deg, rgba(94,23,235,0.22), rgba(139,92,246,0.14));
+  border-bottom: 1px solid rgba(94,23,235,0.35);
+  padding: 13px var(--pad);
+  text-align: center;
+}
+.top-alert__inner {
+  max-width: var(--max); margin: 0 auto;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  flex-wrap: wrap;
+}
+.top-alert__dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--purple-lt);
+  animation: blink 1.6s ease-in-out infinite;
+  flex-shrink: 0;
+}
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.3; }
+}
+.top-alert__text {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800; font-size: 13px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--white);
+}
+.top-alert__text em {
+  color: var(--purple-lt); font-style: normal;
+}
+
+/* ═══════════════════════════════════════════
+   LAYOUT
+═══════════════════════════════════════════ */
+.page {
+  position: relative; z-index: 2;
+  max-width: var(--max);
+  margin: 0 auto;
+  padding: 48px var(--pad) 60px;
+  text-align: center;
+  display: flex; flex-direction: column; gap: 0;
+}
+
+/* ═══════════════════════════════════════════
+   CONFIRM BADGE
+═══════════════════════════════════════════ */
+.confirm {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(34,197,94,0.08);
+  border: 1px solid rgba(34,197,94,0.2);
+  border-radius: 50px; padding: 6px 16px;
+  font-size: 13px; color: rgba(134,239,172,0.85);
+  margin-bottom: 28px;
+  align-self: center;
+}
+.confirm svg { flex-shrink: 0; }
+
+/* ═══════════════════════════════════════════
+   H1
+═══════════════════════════════════════════ */
+h1 {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900;
+  font-size: clamp(30px, 8vw, 54px);
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  line-height: 1.04;
+  color: var(--white);
+  text-wrap: balance;
+  margin-bottom: 16px;
+}
+h1 em {
+  background: linear-gradient(135deg, #a78bfa, #7c3aed);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text; font-style: normal;
+}
+
+/* ═══════════════════════════════════════════
+   H2 / SUBHEADLINE
+═══════════════════════════════════════════ */
+.subhead {
+  font-size: clamp(14px, 3.5vw, 16px);
+  color: var(--muted);
+  max-width: 560px;
+  margin: 0 auto 32px;
+  line-height: 1.7;
+}
+.subhead strong { color: var(--white); font-weight: 600; }
+
+/* ═══════════════════════════════════════════
+   VSL
+═══════════════════════════════════════════ */
+.vsl-wrap {
+  width: 100%; margin-bottom: 28px;
+  border-radius: 14px; overflow: hidden;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,0.02);
+  backdrop-filter: var(--blur); -webkit-backdrop-filter: var(--blur);
+  position: relative;
+}
+.vsl-wrap::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(139,92,246,0.55), transparent);
+  z-index: 1;
+}
+/* Placeholder — remover quando tiver o embed real */
+.vsl-placeholder {
+  aspect-ratio: 16/9;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center; gap: 14px;
+  min-height: 180px;
+}
+.vsl-play {
+  width: 68px; height: 68px;
+  background: linear-gradient(135deg, var(--purple), var(--purple-lt));
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 36px rgba(94,23,235,0.45);
+}
+.vsl-play svg { margin-left: 4px; }
+.vsl-hint {
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700; font-size: 12px;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* ═══════════════════════════════════════════
+   BOTÃO DE COMPRA
+═══════════════════════════════════════════ */
+.cta-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 900; font-size: clamp(15px, 4vw, 18px);
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--white); text-decoration: none;
+  background: linear-gradient(135deg, #5e17eb 0%, #8b5cf6 100%);
+  border-radius: 50px; border: none; cursor: pointer;
+  padding: 0 36px; min-height: 60px; width: 100%;
+  box-shadow: 0 6px 32px rgba(94,23,235,0.5), 0 1px 0 rgba(255,255,255,0.12) inset;
+  position: relative; overflow: hidden;
+  transition: all 0.25s cubic-bezier(0.16,1,0.3,1);
+  animation: pulse-cta 3s ease-in-out infinite;
+  -webkit-tap-highlight-color: transparent;
+}
+.cta-btn::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.07) 100%);
+}
+@keyframes pulse-cta {
+  0%, 100% { box-shadow: 0 6px 32px rgba(94,23,235,0.5), 0 1px 0 rgba(255,255,255,0.12) inset; }
+  50%       { box-shadow: 0 8px 50px rgba(94,23,235,0.7), 0 1px 0 rgba(255,255,255,0.15) inset; }
+}
+@media (hover: hover) {
+  .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 52px rgba(94,23,235,0.7), 0 1px 0 rgba(255,255,255,0.15) inset;
+    animation: none;
+  }
+}
+.cta-btn:active { transform: scale(0.98); opacity: 0.92; animation: none; }
+
+.cta-sub {
+  font-size: 12px; color: var(--dim);
+  margin-top: 10px; letter-spacing: 0.06em;
+}
+
+/* ═══════════════════════════════════════════
+   RECUSA
+═══════════════════════════════════════════ */
+.decline-wrap { margin-top: 20px; }
+.decline-link {
+  background: none; border: none; cursor: pointer;
+  font-size: 12px; color: var(--dim);
+  text-decoration: underline; text-underline-offset: 3px;
+  text-decoration-color: rgba(242,236,251,0.15);
+  transition: color 0.2s; padding: 0;
+}
+.decline-link:hover { color: var(--muted); }
+
+/* ═══════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════ */
+footer {
+  position: relative; z-index: 2;
+  padding: 20px var(--pad);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 11px; color: var(--dim);
+  letter-spacing: 0.16em; text-transform: uppercase;
+  font-family: 'Barlow Condensed', sans-serif; font-weight: 700; line-height: 1.9;
+}
+
+/* ═══════════════════════════════════════════
+   DESKTOP
+═══════════════════════════════════════════ */
+@media (min-width: 640px) {
+  :root { --pad: 40px; }
+  .page { padding-top: 56px; }
+  .cta-btn { font-size: 18px; }
+}
+
+</style>
+</head>
+<body>
+
+<!-- Orbs -->
+<div class="orbs" aria-hidden="true">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+</div>
+
+<!-- ══════════════════════════════════════
+     MÓDULO: ALERTA DE TOPO
+══════════════════════════════════════ -->
+<div class="top-alert">
+  <div class="top-alert__inner">
+    </div>
+    <span class="top-alert__text">
+      Não feche essa página —
+      <em>essa oferta aparece apenas uma vez</em>
+    </span>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     CONTEÚDO PRINCIPAL
+══════════════════════════════════════ -->
+<div class="page">
+
+  <!-- Badge de confirmação -->
+  <div class="confirm">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4ade80" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+    Protocolo de Força Prática confirmado
+  </div>
+
+  <!-- ══════════════════════════════════════
+       MÓDULO: H1
+  ══════════════════════════════════════ -->
+  <h1>
+    Comprar o Protocolo foi a decisão.<br>
+    <em>Executar o Protocolo</em> é o problema que o App resolve.
+  </h1>
+
+  <!-- ══════════════════════════════════════
+       MÓDULO: H2
+  ══════════════════════════════════════ -->
+  <p class="subhead">
+    Assista ao vídeo abaixo. Em menos de 3 minutos você entende
+    por que o <strong>Hard Mode App</strong> é o próximo passo lógico
+    de quem acabou de comprar o Protocolo.
+  </p>
+
+  <!-- ══════════════════════════════════════
+       MÓDULO: VSL
+  ══════════════════════════════════════ -->
+  <div class="vsl-wrap">
+    <!-- ▼ SUBSTITUIR PELO EMBED REAL DO VSL ▼ -->
+    <div class="vsl-placeholder">
+      <div class="vsl-play">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+      </div>
+      <span class="vsl-hint">Insira sua VSL aqui</span>
+    </div>
+    <!-- ▲ SUBSTITUIR PELO EMBED REAL DO VSL ▲ -->
+  </div>
+
+  <!-- ══════════════════════════════════════
+       MÓDULO: BOTÃO DE COMPRA
+  ══════════════════════════════════════ -->
+  <a href="LINK_CHECKOUT_APP" class="cta-btn" id="btn-cta">
+    ✓ &nbsp;Sim, quero o Hard Mode App agora
+  </a>
+  <p class="cta-sub">R$49,90/mês · acesso imediato · cancele quando quiser · garantia de 7 dias</p>
+
+  <div class="decline-wrap">
+    <button class="decline-link" onclick="window.location.href='LINK_POS_RECUSA'">
+      Não, obrigado. Vou continuar sem o app.
+    </button>
+  </div>
+
+</div>
+
+<!-- ══════════════════════════════════════
+     FOOTER
+══════════════════════════════════════ -->
+<footer>
+  © 2025 Hard Mode Inc. · Todos os direitos reservados<br>
+  <a href="#" style="text-decoration:underline;text-underline-offset:3px;">Privacidade</a>
+  &nbsp;·&nbsp;
+  <a href="#" style="text-decoration:underline;text-underline-offset:3px;">Termos</a>
+</footer>
+
+</body>
+</html>
