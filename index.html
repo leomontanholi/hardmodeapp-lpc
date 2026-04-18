@@ -191,56 +191,6 @@ h1 em {
   border: 0;
 }
 
-.video-poster {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
-  border: none;
-  padding: 0;
-  background: #000;
-  cursor: pointer;
-}
-
-.video-poster img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.video-poster::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(6,6,12,0.08), rgba(6,6,12,0.24));
-}
-
-.video-poster__play {
-  position: absolute;
-  inset: 50% auto auto 50%;
-  transform: translate(-50%, -50%);
-  width: 76px;
-  height: 76px;
-  border-radius: 50%;
-  background: rgba(6,6,12,0.74);
-  border: 1px solid rgba(255,255,255,0.12);
-  display: grid;
-  place-items: center;
-  z-index: 2;
-  box-shadow: 0 16px 36px rgba(0,0,0,0.22);
-}
-
-.video-poster__play::before {
-  content: '';
-  margin-left: 4px;
-  width: 0;
-  height: 0;
-  border-top: 12px solid transparent;
-  border-bottom: 12px solid transparent;
-  border-left: 18px solid var(--white);
-}
-
-
 /* ═══════════════════════════════════════════
    BOTÃO DE COMPRA
 ═══════════════════════════════════════════ */
@@ -390,19 +340,13 @@ footer {
   ══════════════════════════════════════ -->
   <div class="vsl-wrap">
     <div class="vsl-embed">
-      <button
-        type="button"
-        class="video-poster"
-        id="video-poster"
-        aria-label="Reproduzir vídeo do Hard Mode App"
-        data-embed="https://www.youtube.com/embed/uZ5bwzGK9Rg?autoplay=1&controls=0&rel=0">
-        <img
-          src="https://i.ytimg.com/vi/uZ5bwzGK9Rg/maxresdefault.jpg"
-          alt="Vídeo do Hard Mode App"
-          loading="eager"
-          fetchpriority="high">
-        <span class="video-poster__play" aria-hidden="true"></span>
-      </button>
+      <iframe
+        src="https://player.mediadelivery.net/play/636159/11742540-ce4a-449c-950d-c8a28e26e442"
+        title="Hard Mode App VSL"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
     </div>
   </div>
 
@@ -431,32 +375,6 @@ footer {
   &nbsp;·&nbsp;
   <a href="#" style="text-decoration:underline;text-underline-offset:3px;">Termos</a>
 </footer>
-
-
-<script>
-(function () {
-  var poster = document.getElementById('video-poster');
-  var container = poster ? poster.parentElement : null;
-
-  if (!poster || !container) return;
-
-  poster.addEventListener('click', function () {
-    var src = poster.getAttribute('data-embed');
-    if (!src) return;
-
-    var iframe = document.createElement('iframe');
-    iframe.src = src;
-    iframe.title = 'Hard Mode App VSL';
-    iframe.loading = 'eager';
-    iframe.referrerPolicy = 'strict-origin-when-cross-origin';
-    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-    iframe.allowFullscreen = true;
-
-    container.innerHTML = '';
-    container.appendChild(iframe);
-  }, { once: true });
-})();
-</script>
 
 </body>
 </html>
